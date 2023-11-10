@@ -24,7 +24,7 @@ export class AuthService {
 		dto.password = await argon.hash(dto.password);
 
 		// If no username was provided, generate a random one
-		if (dto.username === '')
+		if (dto.username == undefined || dto.username === '')
 			dto.username = await this.getRandomName();
 
 		try {
@@ -76,19 +76,6 @@ export class AuthService {
 
 		// Return user
 		return this.signToken(user.id, user.email);
-	}
-
-	/*** LOGOUT ***/
-	async logout(dto: AuthDto) {
-		await this.prisma.user.update({
-			where: {
-				email: dto.email,
-			},
-			data: {
-				status: 'offline',
-			}
-		});
-		return { msg: 'Successfully logged out' };
 	}
 
 	async signToken(userId: number, email: string): Promise<{ access_token: string }> {

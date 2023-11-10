@@ -18,10 +18,4 @@ export class AuthController {
 	googleLogin(@Body() dto: AuthDto) {
 		return this.authService.emailLogin(dto);
 	}
-
-	// Logout endpoint
-	@Patch('logout')
-	logout(@Body() dto: AuthDto) {
-		return this.authService.logout(dto);
-	}
 }
