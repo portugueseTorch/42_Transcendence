@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  dev-db:
+    image: 'postgres:13'
+    networks:
+      - transcendence
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+  
+  test-db:
+    image: 'postgres:13'
+    networks:
+      - transcendence
+    ports:
+      - 5432:5432
+    env_file:
+      - .env.test
+
+networks:
+  transcendence:
+    
+    
